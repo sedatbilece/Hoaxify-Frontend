@@ -1,6 +1,6 @@
 import React from "react";
 import { useState ,useEffect} from "react";
-
+import axios from "axios";
 export default function UserSignupPage() {
 
     const [displayName, setDisplayName] = useState(null);
@@ -22,13 +22,25 @@ export default function UserSignupPage() {
             setPasswordRepeat(event.target.value);
 
     }
-    
+
+    function onClickSignUp(event){
+        event.preventDefault();
+
+        const body={
+            username:username,
+            displayName:displayName,
+            password:password
+        }
+        axios.post("/api/v1/users",body)
+    }    
 
 
     useEffect(() => {
         if(displayName && username && password && passwordRepeat )
-        {console.log("displayname: " + displayName + " username: " + username + " password: " + password + " passwordrepeat: " + passwordRepeat);
-        setSendButton(false);}
+        {
+            //console.log("displayname: " + displayName + " username: " + username + " password: " + password + " passwordrepeat: " + passwordRepeat);
+        setSendButton(false);
+    }
         else
             setSendButton(true);
     }, [displayName,username,password,passwordRepeat]);
@@ -54,7 +66,7 @@ export default function UserSignupPage() {
         </div>
         <div>
           
-            <button disabled={sendButton}>Sign Up</button>
+            <button disabled={sendButton} onClick={onClickSignUp}>Sign Up</button>
         </div>
         </form>
     );

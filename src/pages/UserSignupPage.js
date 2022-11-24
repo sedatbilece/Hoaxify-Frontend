@@ -1,7 +1,7 @@
 import React from "react";
 import { useState ,useEffect} from "react";
 import {signUp} from "../api/apiCalls";
-
+import Input from "../components/Input";
 
 export default function UserSignupPage() {
 
@@ -17,16 +17,24 @@ export default function UserSignupPage() {
 
           
 
-       if(event.target.name === "displayname")
-           setDisplayName(event.target.value);
+       if(event.target.name === "displayname"){
+        setDisplayName(event.target.value);
+        setErrors({...errors,displayName:null});
+       }
+           
         else if(event.target.name === "username"){
           setUsername(event.target.value);
           setErrors({...errors,username:null}); 
         }  
-        else if(event.target.name === "password")
-            setPassword(event.target.value);
-        else if(event.target.name === "passwordrepeat")
-            setPasswordRepeat(event.target.value);
+        else if(event.target.name === "password"){
+          setPassword(event.target.value);
+         
+        }
+        else if(event.target.name === "passwordrepeat"){
+          setPasswordRepeat(event.target.value);
+        
+        }
+           
 
     }
 
@@ -72,52 +80,41 @@ export default function UserSignupPage() {
         <div  className="header">Sign Up</div>
     
         <form class="w-full max-w-sm card-shadow">
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-        Display Name
-      </label>
-    </div>
-    <div class="md:w-2/3">
-      <input name="displayname" onChange={onChanged} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4
-       text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-cyan-300"  type="text" value={displayName} />
-    </div>
-  </div>
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-        UserName
-      </label>
-    </div>
-    <div class="md:w-2/3">
-      <input name="username" onChange={onChanged} type="text"  value={username} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4
-       text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-cyan-300"   />
-       <p class="mt-2 text-sm text-red-600 dark:text-red-500 "> {errors.username}</p>
-    </div>
-  </div>
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-password">
-        Password
-      </label>
-    </div>
-    <div class="md:w-2/3">
-      <input name="password" type="password"  onChange={onChanged} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4
-       text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-cyan-300"  placeholder="******************" value={password}/>
-    </div>
-  </div>
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-password">
-        Password Repeat
-      </label>
-    </div>
-    <div class="md:w-2/3">
-      <input name="passwordrepeat"  onChange={onChanged} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4
-       text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-cyan-300" type="password" placeholder="******************" value={passwordRepeat} />
-    </div>
-  </div>
-  
+
+   <Input 
+   name="displayname"
+    label="Display Name"
+    error={errors.displayName}
+    onChanged={onChanged}
+    value={displayName}
+    type="text"
+   />
+
+    <Input
+    name="username"
+    label="Username"
+    error={errors.username}
+    onChanged={onChanged}
+    value={username}
+    type="text"
+    />
+  <Input 
+  name="password"
+  label="Password"
+  error={errors.password}
+  onChanged={onChanged}
+  value={password}
+  type="password"
+  />
+  <Input
+  name="passwordrepeat"
+  label="Password Repeat"
+  error={errors.passwordRepeat}
+  onChanged={onChanged}
+  value={passwordRepeat}
+  type="password"
+  />
+
   <div class="md:flex md:items-center">
     <div class="md:w-1/3"></div>
     <div class="md:w-2/3">

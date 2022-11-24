@@ -11,13 +11,18 @@ export default function UserSignupPage() {
     const [passwordRepeat, setPasswordRepeat] = useState(null);
     const [pendingApiCall, setPendingApiCall] = useState(false);
     const [sendButton, setSendButton] = useState(true);
-
+    const [errors, setErrors] = useState({});
 
     function onChanged (event) {
+
+          
+
        if(event.target.name === "displayname")
            setDisplayName(event.target.value);
-        else if(event.target.name === "username")
-            setUsername(event.target.value);
+        else if(event.target.name === "username"){
+          setUsername(event.target.value);
+          setErrors({...errors,username:null}); 
+        }  
         else if(event.target.name === "password")
             setPassword(event.target.value);
         else if(event.target.name === "passwordrepeat")
@@ -39,7 +44,11 @@ export default function UserSignupPage() {
             console.log(response.data.message);
             setPendingApiCall(false);
         }).catch(error=>{
-            console.log(error);
+            console.log(error.response.data);
+            if(error.response.data.validationErrors){
+                setErrors(error.response.data.validationErrors);
+            }
+           
             setPendingApiCall(false);
         })
         setDisplayName("");setUsername("");setPassword("");setPasswordRepeat("");
@@ -47,6 +56,7 @@ export default function UserSignupPage() {
 
 
     useEffect(() => {
+      console.log("errors:",errors);
         if(displayName && username && password && passwordRepeat )
         {
         setSendButton(false);
@@ -55,7 +65,7 @@ export default function UserSignupPage() {
             setSendButton(true);
 
 
-    }, [displayName,username,password,passwordRepeat]);
+    }, [displayName,username,password,passwordRepeat,errors]);
 
     return (
         <div className="con">
@@ -80,8 +90,9 @@ export default function UserSignupPage() {
       </label>
     </div>
     <div class="md:w-2/3">
-      <input name="username" onChange={onChanged} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4
-       text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-cyan-300"  type="text"  value={username}/>
+      <input name="username" onChange={onChanged} type="text"  value={username} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4
+       text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-cyan-300"   />
+       <p class="mt-2 text-sm text-red-600 dark:text-red-500 "> {errors.username}</p>
     </div>
   </div>
   <div class="md:flex md:items-center mb-6">
@@ -110,7 +121,7 @@ export default function UserSignupPage() {
   <div class="md:flex md:items-center">
     <div class="md:w-1/3"></div>
     <div class="md:w-2/3">
-      <button disabled={sendButton} onClick={onClickSignUp} className='shadow bg-cyan-300 hover:bg-cyan-400 focus:shadow-outline 
+      <button   onClick={onClickSignUp} className='shadow bg-cyan-300 hover:bg-cyan-400 focus:shadow-outline 
       focus:outline-none  text-white font-bold py-2 px-4 rounded sendit' type="submit">
         Sign Up {pendingApiCall && <div role="status">
     <svg aria-hidden="true" class="mr-2 w-4 h-4 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

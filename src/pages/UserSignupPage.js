@@ -14,8 +14,10 @@ export default function UserSignupPage() {
     const [errors, setErrors] = useState({});
 
     function onChanged (event) {
-
-          
+       
+      console.log(password,passwordRepeat);
+          console.log(event.target.name);
+          console.log(event.target.value);
 
        if(event.target.name === "displayname"){
         setDisplayName(event.target.value);
@@ -28,8 +30,17 @@ export default function UserSignupPage() {
         }  
         else if(event.target.name === "password"){
           setPassword(event.target.value);
-          setErrors({...errors,password:null});
+          setErrors({...errors,password:null}); 
         }
+        else if (event.target.name==="passwordRepeat"){
+          setPasswordRepeat(event.target.value);
+          if( event.target.value !== password){
+            setErrors({...errors,passwordRepeat:"Passwords do not match"});
+        }
+        else{
+          setErrors({...errors,passwordRepeat:null});
+        }
+      }
     }
 
     function onClickSignUp(event){
@@ -59,7 +70,6 @@ for (var ii=0; ii < elements.length; ii++) {
     elements[ii].value = "";
   }
 }
-
         setDisplayName(null);setUsername(null);setPassword(null);setPasswordRepeat(null);
     }    
 
@@ -108,7 +118,7 @@ for (var ii=0; ii < elements.length; ii++) {
   type="password"
   />
   <Input
-  name="passwordrepeat"
+  name="passwordRepeat"
   label="Password Repeat"
   error={errors.passwordRepeat}
   onChanged={onChanged}

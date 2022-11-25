@@ -28,14 +28,8 @@ export default function UserSignupPage() {
         }  
         else if(event.target.name === "password"){
           setPassword(event.target.value);
-         
+          setErrors({...errors,password:null});
         }
-        else if(event.target.name === "passwordrepeat"){
-          setPasswordRepeat(event.target.value);
-        
-        }
-           
-
     }
 
     function onClickSignUp(event){
@@ -59,7 +53,14 @@ export default function UserSignupPage() {
            
             setPendingApiCall(false);
         })
-        setDisplayName("");setUsername("");setPassword("");setPasswordRepeat("");
+        var elements = document.getElementsByTagName("input");
+for (var ii=0; ii < elements.length; ii++) {
+  if (elements[ii].type == "text" || elements[ii].type == "password") {
+    elements[ii].value = "";
+  }
+}
+
+        setDisplayName(null);setUsername(null);setPassword(null);setPasswordRepeat(null);
     }    
 
 

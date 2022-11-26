@@ -12,7 +12,7 @@ const Input = (props) =>{
       </label>
     </div>
     <div class="md:w-2/3">
-      <input name={name} onChange={onChanged} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4
+      <input name={name} onChange={onChanged} className="bg-white appearance-none border-2 border-gray-200 rounded w-full py-2 px-4
        text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-cyan-300"  type={type} value={value} />
         <p class="mt-2 text-sm text-red-600 dark:text-red-500 "> {error}</p>
     </div>

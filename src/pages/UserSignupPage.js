@@ -2,6 +2,7 @@ import React from "react";
 import { useState ,useEffect} from "react";
 import {signUp} from "../api/apiCalls";
 import Input from "../components/Input";
+import "../style/SignupPage.css";
 
 export default function UserSignupPage() {
 

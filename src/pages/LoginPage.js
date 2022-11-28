@@ -2,6 +2,7 @@ import React from "react";
 import Input from "../components/Input";
 import "../style/LoginPage.css";
 import { useState } from "react";
+import {login} from "../api/apiCalls";
 const LoginPage = () => {
 
     const [pendingApiCall, setPendingApiCall] = useState(false);
@@ -16,7 +17,14 @@ const LoginPage = () => {
             setPassword(event.target.value);
         }
     }
-const Login = () => {
+const onClickLogin = (event ) => {
+  event.preventDefault(); 
+  const creds = {
+    username,
+    password
+  };
+  login(creds)
+
 }
 
 
@@ -41,7 +49,7 @@ const Login = () => {
   <div class="md:flex md:items-center">
     <div class="md:w-1/3"></div>
     <div class="md:w-2/3">
-      <button   onClick={Login} className='shadow bg-cyan-300 hover:bg-cyan-400 focus:shadow-outline 
+      <button   onClick={onClickLogin} className='shadow bg-cyan-300 hover:bg-cyan-400 focus:shadow-outline 
       focus:outline-none  text-white font-bold py-2 px-4 rounded sendit' type="submit">
         Login {pendingApiCall && <div role="status">
     <svg aria-hidden="true" class="mr-2 w-4 h-4 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

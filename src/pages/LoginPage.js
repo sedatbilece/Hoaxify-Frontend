@@ -15,16 +15,19 @@ const LoginPage = () => {
         if (event.target.name === "username") {
             setUsername(event.target.value);
             setErrors({...errors,username:null});
+            setLoginResponse(null);
         }
         else if (event.target.name === "password") {
             setPassword(event.target.value);
             setErrors({...errors,password:null});
+            setLoginResponse(null);
         }
     }
 const onClickLogin = (event ) => {
 
   if(username === null || password === null){
     setErrors({...errors,username:"Username cannot be empty",password:"Password cannot be empty"});
+    
   }
   console.log(errors);
  
@@ -35,6 +38,7 @@ const onClickLogin = (event ) => {
   };
   login(creds).then(response => {
     console.log(response.data);
+    setLoginResponse(null);
   }).catch(error => {
     if(username !== null || password !== null){
       setLoginResponse(error.response.data.message);

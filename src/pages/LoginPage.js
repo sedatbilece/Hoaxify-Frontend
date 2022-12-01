@@ -8,23 +8,46 @@ const LoginPage = () => {
     const [pendingApiCall, setPendingApiCall] = useState(false);
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
-
+    const [errors, setErrors] = useState({});
+    const [sendButton, setSendButton] = useState(true);
+    const [loginResponse, setLoginResponse] = useState(null);
     function onChanged(event) {
         if (event.target.name === "username") {
             setUsername(event.target.value);
+            setErrors({...errors,username:null});
         }
         else if (event.target.name === "password") {
             setPassword(event.target.value);
+            setErrors({...errors,password:null});
         }
     }
 const onClickLogin = (event ) => {
+
+  if(username === null || password === null){
+    setErrors({...errors,username:"Username cannot be empty",password:"Password cannot be empty"});
+  }
+  console.log(errors);
+ 
   event.preventDefault(); 
   const creds = {
     username,
     password
   };
-  login(creds)
-
+  login(creds).then(response => {
+    console.log(response.data);
+  }).catch(error => {
+    if(username !== null || password !== null){
+      setLoginResponse(error.response.data.message);
+    }
+    
+  });
+  setUsername(null);setPassword(null);
+  var elements = document.getElementsByTagName("input");
+  for (var ii=0; ii < elements.length; ii++) {
+    if (elements[ii].type == "text" || elements[ii].type == "password") {
+      elements[ii].value = "";
+    }
+  }
 }
 
 
@@ -38,17 +61,22 @@ const onClickLogin = (event ) => {
     name="username"
     label="Username"
     type="text"
+    error = {errors.username}
     onChanged={onChanged}
     />
   <Input 
   name="password"
   label="Password"
   type="password"
+  error = {errors.password}
     onChanged={onChanged}
   />
   <div class="md:flex md:items-center">
     <div class="md:w-1/3"></div>
     <div class="md:w-2/3">
+    {loginResponse && <div class="bg-red-100 border  text-red-700 px-4 py-3 rounded relative m-1" role="alert">
+  <span class="block sm:inline">Username or Password wrong !</span>
+</div>}
       <button   onClick={onClickLogin} className='shadow bg-cyan-300 hover:bg-cyan-400 focus:shadow-outline 
       focus:outline-none  text-white font-bold py-2 px-4 rounded sendit' type="submit">
         Login {pendingApiCall && <div role="status">
@@ -59,6 +87,7 @@ const onClickLogin = (event ) => {
     
 </div>}
       </button>
+      
     </div>
   </div>
 </form>

@@ -10,30 +10,17 @@ import {
   Link,
   redirect
 } from 'react-router-dom'; 
+import TopBar from './components/TopBar';
 
 function App() {
   return (
     <div className="App">
       
+      
 
       <Router>
-      <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">login</Link>
-            </li>
-            <li>
-              <Link to="/signup">signup</Link>
-            </li>
-            <li>
-              <Link to="/user">user </Link>
-            </li>
-          </ul>
-        </nav>
-        <hr></hr>
+      <TopBar />
+     
       <Routes>
             <Route path="/" element={<HomePage/>} />
             <Route path="/login" element={<LoginPage/>} />

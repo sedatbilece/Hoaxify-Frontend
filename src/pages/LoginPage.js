@@ -3,7 +3,10 @@ import Input from "../components/Input";
 import "../style/LoginPage.css";
 import { useState } from "react";
 import {login} from "../api/apiCalls";
-const LoginPage = () => {
+import { useNavigate } from 'react-router-dom';
+
+const LoginPage = (props) => {
+  let navigate = useNavigate();
 
     const [pendingApiCall, setPendingApiCall] = useState(false);
     const [username, setUsername] = useState(null);
@@ -24,6 +27,7 @@ const LoginPage = () => {
         }
     }
 const onClickLogin = (event ) => {
+  
 
   if(username === null || password === null){
     setErrors({...errors,username:"Username cannot be empty",password:"Password cannot be empty"});
@@ -39,6 +43,9 @@ const onClickLogin = (event ) => {
   login(creds).then(response => {
     console.log(response.data);
     setLoginResponse(null);
+   
+    navigate('/');
+
   }).catch(error => {
     if(username !== null || password !== null){
       setLoginResponse(error.response.data.message);

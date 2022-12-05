@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginPage = (props) => {
   let navigate = useNavigate();
-
+      let {onLoginSuccess} = props;
     const [pendingApiCall, setPendingApiCall] = useState(false);
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
@@ -40,11 +40,13 @@ const onClickLogin = (event ) => {
     username,
     password
   };
-  login(creds).then(response => {
+  login(creds).then(response => {// success login
     console.log(response.data);
     setLoginResponse(null);
-   
     navigate('/');
+    onLoginSuccess(response.data.username);
+    
+   
 
   }).catch(error => {
     if(username !== null || password !== null){
@@ -60,8 +62,6 @@ const onClickLogin = (event ) => {
     }
   }
 }
-
-
     return (
         <div className="con">
         <div  className="header">Login</div>

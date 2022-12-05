@@ -1,12 +1,11 @@
 import React from "react";
 import logo from "../assets/hoaxify.png"
 import {Link, HashRouter as Router,} from "react-router-dom";
-import { useState } from "react";
 
-const TopBar = () => {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [username, setUsername] = useState('user1');
+const TopBar = (props) => {
+
+   const {username,isLoggedIn,setIsLoggedIn} = props;
 
     let links =(
         <>
@@ -27,7 +26,7 @@ const TopBar = () => {
                         </Link> 
                     </li>
                     <li>
-                    <Link to="/logout" className="text-gray-900 dark:text-white hover:underline">Logout</Link> 
+                    <Link to="/logout"  onClick={()=>setIsLoggedIn(false)} className="text-gray-900 dark:text-white hover:underline">Logout</Link> 
                     </li>
                      
                     </>

@@ -1,12 +1,12 @@
 import React from "react";
 import logo from "../assets/hoaxify.png"
 import {Link, HashRouter as Router,} from "react-router-dom";
-import { useSelector } from "react-redux";
+
 
 const TopBar = (props) => {
 
    const {username,isLoggedIn,setIsLoggedIn} = props;
-  
+
     let links =(
         <>
                 
@@ -46,9 +46,7 @@ const TopBar = (props) => {
         <div class="flex items-center">
             
             <ul class="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
-                 
-
-
+                
                 
                 {!isLoggedIn  ? links : links2}
                 

@@ -4,7 +4,8 @@ import "../style/LoginPage.css";
 import { useState } from "react";
 import {login} from "../api/apiCalls";
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch } from "react-redux";
+import {loginAuth} from "../shared/loginSlice"
 const LoginPage = (props) => {
   let navigate = useNavigate();
       let {onLoginSuccess} = props;
@@ -14,6 +15,9 @@ const LoginPage = (props) => {
     const [errors, setErrors] = useState({});
     const [sendButton, setSendButton] = useState(true);
     const [loginResponse, setLoginResponse] = useState(null);
+
+    const dispatch = useDispatch();
+
     function onChanged(event) {
         if (event.target.name === "username") {
             setUsername(event.target.value);
@@ -26,6 +30,7 @@ const LoginPage = (props) => {
             setLoginResponse(null);
         }
     }
+
 const onClickLogin = (event ) => {
   
 
@@ -41,9 +46,10 @@ const onClickLogin = (event ) => {
     password
   };
   login(creds).then(response => {// success login
-    console.log(response.data);
+    console.log("success login:" ,response.data);
     setLoginResponse(null);
     navigate('/');
+    dispatch(loginAuth({username,password}));
     onLoginSuccess(response.data.username);
     
    

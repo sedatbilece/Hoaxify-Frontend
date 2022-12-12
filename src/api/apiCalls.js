@@ -8,3 +8,8 @@ export const signUp = (body) => {
 export const login = (creds) => {
   return axios.post("/api/v1/auth",{},{auth:creds});
 }
+
+export const getUsers = () => {
+  return axios.get("/api/v1/users");
+}
+

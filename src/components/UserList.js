@@ -2,14 +2,16 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { getUsers } from "../api/apiCalls";
 import "../style/UserList.css"
-
+import defaultPic from "../assets/profile.png"
+import {Link} from "react-router-dom";
 const UserList = () => {
 
     const [users, setUsers] = useState([]);
     
     useEffect(() => {
          getUsers().then((response) => {
-            setUsers(response.data);
+            setUsers(response.data.content);
+            console.log(response.data);
         });
 
     }, []);
@@ -22,10 +24,11 @@ const UserList = () => {
 
             {users.map((user) => {
                 return (
-    <li  key={user.id} class="py-2 px-4 w-full rounded-lg border-b border-gray-200 dark:border-gray-600 flex hover:bg-gray-100 ">{user.username}</li>
-    
-                   
-      
+                   <Link  to={`/user/${user.username}`}className="flex hover:bg-gray-100 mt-2">
+                    <img src={defaultPic} className="rounded-full w-12 h-12"></img>
+                        <li  key={user.id} class="py-2 px-4 w-full rounded-lg border-b border-gray-200 dark:border-gray-600 flex  ">{user.displayName} @{user.username}</li>
+
+                   </Link>
                 );
             } )}
             </ul>

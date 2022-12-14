@@ -35,3 +35,18 @@
     background-color: darkred;
     transform: scale(0.95);
 }
+.doldur{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between
+}
+.btn{
+    padding: 5px 10px 5px 10px;
+    margin: 5px;
+    background-color: rgb(229, 231, 235);
+    border-radius: 10px;
+}
+.btn:active{
+    transform: scale(0.95);
+    background-color: rgb(219, 221, 225);;
+}

@@ -7,15 +7,24 @@ import {Link} from "react-router-dom";
 const UserList = () => {
 
     const [users, setUsers] = useState([]);
+    const [pages, setPages] = useState([]);
     
     useEffect(() => {
-         getUsers().then((response) => {
-            setUsers(response.data.content);
-            console.log(response.data);
-        });
+         loadUsers();
 
     }, []);
 
+
+    const loadUsers = (page) => {
+        getUsers(page).then((response) => {
+            console.log(response.data)
+            setUsers(response.data.content);
+            setPages(response.data)
+        });
+    }
+
+
+    
     return (
         <div className="container">
             
@@ -31,7 +40,12 @@ const UserList = () => {
                    </Link>
                 );
             } )}
+            <div className="doldur ">
+               {!pages.first && <button className="btn" onClick={()=>loadUsers(pages.number-1)}>Prev</button>}
+                {!pages.last && <button className="btn" onClick={()=>loadUsers(pages.number+1)}>Next</button>}
+            </div>
             </ul>
+            
         </div>
     );
 };

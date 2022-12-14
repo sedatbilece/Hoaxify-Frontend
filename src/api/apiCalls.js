@@ -9,7 +9,7 @@ export const login = (creds) => {
   return axios.post("/api/v1/auth",{},{auth:creds});
 }
 
-export const getUsers = () => {
-  return axios.get("/api/v1/users");
+export const getUsers = (currentPage=0,pageSize=5) => {
+  return axios.get(`/api/v1/users?currentPage=${currentPage}&pageSize=${pageSize}`);
 }
 

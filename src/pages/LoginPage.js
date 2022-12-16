@@ -43,7 +43,7 @@ const onClickLogin = (event ) => {
   login(creds).then(response => {// success login
     console.log(response.data);
     setLoginResponse(null);
-    navigate('/');
+    navigate(`/user/${response.data.username}`);
     onLoginSuccess(response.data.username);
     
    

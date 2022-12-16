@@ -36,7 +36,7 @@ function onLoginSuccess (user) {
             <Route path="/login" element={<LoginPage onLoginSuccess={onLoginSuccess}/>}  />
             <Route path="/signup" element={<UserSignupPage/>} />
             <Route path="/user/:username" element={<UserPage/>} />
-            <Route path="*" element={<HomePage/>} />
+            <Route path="*" element={<div>Not Found</div>} />
          </Routes>
       </Router>
     </div>

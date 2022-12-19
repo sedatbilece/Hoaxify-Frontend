@@ -12,6 +12,14 @@ const UserPage = (props) => {
     const [user, setUser] = useState({});
     const [error, setError] = useState(null);
     const[notFound,setNotFound] = useState(false);
+    const [editable, setEditable] = useState(false);
+
+    const checkEditable = () => {
+        if (LoggedInUsername === username) {
+            setEditable(true);
+        }
+    }
+
     useEffect(() => {
         loadUser(username);
     }, []);
@@ -31,6 +39,7 @@ const UserPage = (props) => {
             setError(error.response.data.message);
         }
         );
+        checkEditable();
     }
 
 
@@ -46,7 +55,7 @@ const UserPage = (props) => {
     return(
         <div className="container">
             
-              <ProfileCard user={user} LoggedInUsername={LoggedInUsername} />
+              <ProfileCard user={user} LoggedInUsername={LoggedInUsername} editable={editable} />
         </div>
 
     )

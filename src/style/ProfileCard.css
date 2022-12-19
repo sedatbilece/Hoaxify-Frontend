@@ -4,11 +4,11 @@
     padding: 40px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
     border-radius: 20px;
+    justify-content: space-around;
 }
-
-.borderx{
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
+.contan{
+    
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+    padding: 40px;
+    border-radius: 20px;
 }

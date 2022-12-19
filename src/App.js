@@ -17,11 +17,11 @@ function App() {
 
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState('');
+  const [LoggedInUsername, setLoggedInUsername] = useState('');
 
 function onLoginSuccess (user) {
     setIsLoggedIn(true);
-    setUsername(user);
+    setLoggedInUsername(user);
     console.log("Login Success",user,);
   }
 
@@ -29,13 +29,13 @@ function onLoginSuccess (user) {
     <div className="App">
     
       <Router>
-      <TopBar  username={username} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <TopBar  LoggedInUsername={LoggedInUsername} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
      
       <Routes>
             <Route path="/" element={<HomePage/>} />
             <Route path="/login" element={<LoginPage onLoginSuccess={onLoginSuccess}/>}  />
             <Route path="/signup" element={<UserSignupPage/>} />
-            <Route path="/user/:username" element={<UserPage/>} />
+            <Route path="/user/:username" element={<UserPage LoggedInUsername={LoggedInUsername} />} />
             <Route path="*" element={<div>Not Found</div>} />
          </Routes>
       </Router>

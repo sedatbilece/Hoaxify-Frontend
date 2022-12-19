@@ -2,7 +2,10 @@ import React from "react";
 import { useParams,useLocation   } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getUser } from "../api/apiCalls";
-const UserPage = () => {
+import "../style/UserPage.css"
+import ProfileCard from "../components/ProfileCard";
+const UserPage = (props) => {
+    const {LoggedInUsername} = props;
     let { username } = useParams();
     let location = useLocation();
 
@@ -31,13 +34,26 @@ const UserPage = () => {
     }
 
 
-    return (
-        <div>
-        <h1>User Page</h1>
-        <hr></hr>
-        
-        {notFound ? <p className="bg-red-100 border  text-red-700 px-4 py-3 rounded relative m-1">{error}</p>:<p >Username: {user.username}</p>}
+    if(notFound){
+        return (
+            <div className="container">
+            
+             <p className="bg-red-100 border  text-red-700  relative m-1 centerdiv p-7 rounded-2xl">{error}</p>
+            </div>
+        );
+    }
+    
+    return(
+        <div className="container">
+            
+              <ProfileCard user={user} LoggedInUsername={LoggedInUsername} />
         </div>
-    );
+
+    )
+
+
+
+
+
     }
 export default UserPage;

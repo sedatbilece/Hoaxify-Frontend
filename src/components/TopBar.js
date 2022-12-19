@@ -5,7 +5,7 @@ import {Link, HashRouter as Router,} from "react-router-dom";
 
 const TopBar = (props) => {
 
-   const {username,isLoggedIn,setIsLoggedIn} = props;
+   const {LoggedInUsername,isLoggedIn,setIsLoggedIn} = props;
 
     let links =(
         <>
@@ -21,8 +21,8 @@ const TopBar = (props) => {
         let links2 = (
             <>
                     <li>
-                    <Link to={"/user/"+username} className="text-gray-900 dark:text-white hover:underline">
-                        {username}
+                    <Link to={"/user/"+LoggedInUsername} className="text-gray-900 dark:text-white hover:underline">
+                        {LoggedInUsername}
                         </Link> 
                     </li>
                     <li>

@@ -1,23 +1,34 @@
 import React from "react";
 import "../style/ProfileCard.css"
 import defaultPic from "../assets/profile.png"
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import Input from "./Input";
 const ProfileCard = (props) => {
 
     const {user,LoggedInUsername,editable} = props;
     const {username,displayName,image} = user;
     const [inEditMode,setInEditMode] = useState(false);
-
+    const [updatedDisplayName,setUpdatedDisplayName] = useState(displayName);
     let message="user cannot edit this profile";
     if(LoggedInUsername===user.username){
         message="user can edit this profile";
     }
 
+  
+    
+
     let imageSource = defaultPic;
     if (image) {
         imageSource = image;
     }
+
+    const updateDisplayName = (event) => {
+
+        
+        console.log("updatedDisplayName (Save):",updatedDisplayName);
+        setInEditMode(false);
+    }
+
 
     return (
         <>
@@ -51,14 +62,19 @@ const ProfileCard = (props) => {
                     )}
                     {inEditMode && (
                         <div className="mt-2 contan ">
+                            <form>
                            <Input
                             label="Change Display Name"
                             placeholder="Your display name"
-                            
-                            onChange={() => {}}
+                            defaultValue={updatedDisplayName}
+                            value={updatedDisplayName}
+                            onChanged={(e) => {
+                                setUpdatedDisplayName(e.target.value);
+                            }}
                             />
-                            <button className="btn bg-green-500 text-white" >Save</button>
+                            <button className="btn bg-green-500 text-white" onClick={()=>updateDisplayName()} >Save</button>
                             <button className="btn bg-red-500 text-white" onClick={()=> setInEditMode(false)}>Cancel</button>
+                            </form>
                         </div>
                     )}
                     </>

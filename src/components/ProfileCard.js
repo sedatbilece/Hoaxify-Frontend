@@ -11,11 +11,6 @@ const ProfileCard = (props) => {
 
     const [inEditMode,setInEditMode] = useState(false);
     const [updatedDisplayName,setUpdatedDisplayName] = useState(displayName);
-    let message="user cannot edit this profile";
-    if(LoggedInUsername===user.username){
-        message="user can edit this profile";
-    }
-
   
     useEffect(() => {
         setUpdatedDisplayName(displayName);

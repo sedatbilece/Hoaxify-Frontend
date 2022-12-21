@@ -55,7 +55,7 @@ const UserPage = (props) => {
     return(
         <div className="container">
             
-              <ProfileCard user={user} LoggedInUsername={LoggedInUsername} editable={editable} />
+              <ProfileCard user={user} LoggedInUsername={LoggedInUsername} editable={editable} setUser={setUser}/>
         </div>
 
     )

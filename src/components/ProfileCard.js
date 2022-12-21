@@ -3,10 +3,12 @@ import "../style/ProfileCard.css"
 import defaultPic from "../assets/profile.png"
 import { useState ,useEffect} from "react";
 import Input from "./Input";
+import { updateUser } from "../api/apiCalls";
 const ProfileCard = (props) => {
 
-    const {user,LoggedInUsername,editable} = props;
+    const {user,LoggedInUsername,editable,setUser} = props;
     const {username,displayName,image} = user;
+
     const [inEditMode,setInEditMode] = useState(false);
     const [updatedDisplayName,setUpdatedDisplayName] = useState(displayName);
     let message="user cannot edit this profile";
@@ -26,11 +28,28 @@ const ProfileCard = (props) => {
         imageSource = image;
     }
 
-    const updateDisplayName = (event) => {
+    const updateDisplayName = async(event) => {
+        const body = {
+            displayName: updatedDisplayName
+        }
+         try{
+            await  updateUser(username,body);
+            setInEditMode(false);
+            setUser({
+                ...user,
+                displayName:updatedDisplayName
+            })
+
+         }
+         catch(error){
+                console.log(error);
+         }
+        
+
+
 
         
-        console.log("updatedDisplayName (Save):",updatedDisplayName);
-        setInEditMode(false);
+        
     }
 
 

@@ -50,8 +50,7 @@ const ProfileCard = (props) => {
 
     return (
         <>
-        <p>{message} </p>
-        <hr></hr>
+        
         <div className=" w-2/3 ">
             <div className=" ProfCard">
                 <div className="">

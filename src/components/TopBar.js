@@ -26,7 +26,7 @@ const TopBar = (props) => {
                         </Link> 
                     </li>
                     <li>
-                    <Link to="/logout"  onClick={()=>setIsLoggedIn(false)} className="text-gray-900 dark:text-white hover:underline">Logout</Link> 
+                    <Link to="/"  onClick={()=>setIsLoggedIn(false)} className="text-gray-900 dark:text-white hover:underline">Logout</Link> 
                     </li>
                      
                     </>

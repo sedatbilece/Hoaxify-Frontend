@@ -15,6 +15,10 @@ const ProfileCard = (props) => {
     }
 
   
+    useEffect(() => {
+        setUpdatedDisplayName(displayName);
+    }, [displayName])
+
     
 
     let imageSource = defaultPic;
@@ -66,14 +70,13 @@ const ProfileCard = (props) => {
                            <Input
                             label="Change Display Name"
                             placeholder="Your display name"
-                            defaultValue={updatedDisplayName}
                             value={updatedDisplayName}
                             onChanged={(e) => {
                                 setUpdatedDisplayName(e.target.value);
                             }}
                             />
-                            <button className="btn bg-green-500 text-white" onClick={()=>updateDisplayName()} >Save</button>
-                            <button className="btn bg-red-500 text-white" onClick={()=> setInEditMode(false)}>Cancel</button>
+                            <button type="submit" className="btn bg-green-500 text-white" onClick={()=>updateDisplayName()} >Save</button>
+                            <button  type ="reset"  className="btn bg-red-500 text-white" onClick={()=> setInEditMode(false)}>Cancel</button>
                             </form>
                         </div>
                     )}

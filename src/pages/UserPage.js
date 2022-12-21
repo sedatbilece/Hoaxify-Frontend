@@ -5,23 +5,25 @@ import { getUser } from "../api/apiCalls";
 import "../style/UserPage.css"
 import ProfileCard from "../components/ProfileCard";
 const UserPage = (props) => {
-    const {LoggedInUsername} = props;
+    const {LoggedInUsername,isLoggedIn} = props;
     let { username } = useParams();
     let location = useLocation();
 
+    const [isLogged, setIsLogged] = useState(false);
     const [user, setUser] = useState({});
     const [error, setError] = useState(null);
     const[notFound,setNotFound] = useState(false);
     const [editable, setEditable] = useState(false);
 
     const checkEditable = () => {
-        if (LoggedInUsername === username) {
+        if (LoggedInUsername === username && isLoggedIn) {
             setEditable(true);
         }
     }
 
     useEffect(() => {
         loadUser(username);
+        setIsLogged(isLoggedIn);
     }, []);
 
     useEffect(() => {
@@ -55,7 +57,7 @@ const UserPage = (props) => {
     return(
         <div className="container">
             
-              <ProfileCard user={user} LoggedInUsername={LoggedInUsername} editable={editable} setUser={setUser}/>
+              <ProfileCard user={user} LoggedInUsername={LoggedInUsername} editable={editable} setUser={setUser} />
         </div>
 
     )

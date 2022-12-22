@@ -11,6 +11,7 @@ const ProfileCard = (props) => {
 
     const [inEditMode,setInEditMode] = useState(false);
     const [updatedDisplayName,setUpdatedDisplayName] = useState(displayName);
+    const [newImage,setNewImage] = useState(null);
   
     useEffect(() => {
         setUpdatedDisplayName(displayName);
@@ -19,9 +20,23 @@ const ProfileCard = (props) => {
     
 
     let imageSource = defaultPic;
+    if(newImage){
+        imageSource = newImage;
+    }
     if (image) {
         imageSource = image;
     }
+
+
+    const onChangeFile = (event) => {
+        const file = event.target.files[0];
+        const fileReader = new FileReader();
+        fileReader.onloadend = () => {
+            setNewImage(fileReader.result);
+        }
+        fileReader.readAsDataURL(file);
+    }
+
 
     const updateDisplayName = async(event) => {
         const body = {
@@ -38,13 +53,7 @@ const ProfileCard = (props) => {
          }
          catch(error){
                 console.log(error);
-         }
-        
-
-
-
-        
-        
+         }   
     }
 
 
@@ -54,7 +63,7 @@ const ProfileCard = (props) => {
         <div className=" w-2/3 ">
             <div className=" ProfCard">
                 <div className="">
-                    <img src={imageSource} alt="profile" className="rounded-circle rounded-full" width="100" height="100" />
+                    <img src={imageSource} alt="profile" className="rounded-circle rounded-full" width="100px" height="100px" />
                 </div>
                 
                 <div className=" mt-4 ml-6">
@@ -88,8 +97,13 @@ const ProfileCard = (props) => {
                                 setUpdatedDisplayName(e.target.value);
                             }}
                             />
+                            <input type="file" className="mt-2" onChange={onChangeFile} />
                             <button type="submit" className="btn bg-green-500 text-white" onClick={()=>updateDisplayName()} >Save</button>
-                            <button  type ="reset"  className="btn bg-red-500 text-white" onClick={()=> setInEditMode(false)}>Cancel</button>
+                            <button  type ="reset"  className="btn bg-red-500 text-white" 
+                            onClick={()=> {
+                                setInEditMode(false);
+                                setNewImage(null);
+                            }}>Cancel</button>
                             </form>
                         </div>
                     )}

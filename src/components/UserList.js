@@ -14,6 +14,16 @@ const UserList = () => {
 
     }, []);
 
+    useEffect(() => {
+        console.log("users =>",users);
+        imageSource = users.image;
+    }, [users]);
+
+    let imageSource = defaultPic;
+if(users && users.image){
+    imageSource = users.image;
+}
+
 
     const loadUsers = (page) => {
         getUsers(page).then((response) => {

@@ -38,9 +38,10 @@ const ProfileCard = (props) => {
     }
 
 
-    const updateDisplayName = async(event) => {
+    const updateDisplayName = async() => {
         const body = {
-            displayName: updatedDisplayName
+            displayName: updatedDisplayName,
+            image:newImage
         }
          try{
             await  updateUser(username,body);

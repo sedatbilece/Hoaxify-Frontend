@@ -50,11 +50,14 @@ const ProfileCard = (props) => {
                 ...user,
                 displayName:updatedDisplayName
             })
-
+            setValidationError({});
          }
          catch(error){
                 setValidationError(error.response.data.validationErrors);
          }   
+         setUpdatedDisplayName(null);
+         setNewImage(null);
+         
     }
 
 

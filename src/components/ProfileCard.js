@@ -12,7 +12,7 @@ const ProfileCard = (props) => {
     const [inEditMode,setInEditMode] = useState(false);
     const [updatedDisplayName,setUpdatedDisplayName] = useState(displayName);
     const [newImage,setNewImage] = useState(null);
-  
+    const [validationError,setValidationError] = useState({});
     useEffect(() => {
         setUpdatedDisplayName(displayName);
     }, [displayName])
@@ -53,7 +53,7 @@ const ProfileCard = (props) => {
 
          }
          catch(error){
-                console.log(error);
+                setValidationError(error.response.data.validationErrors);
          }   
     }
 
@@ -98,6 +98,11 @@ const ProfileCard = (props) => {
                                 setUpdatedDisplayName(e.target.value);
                             }}
                             />
+                            {validationError && validationError.displayName && (
+                                <div className="bg-red-100 border  text-red-700 px-4 py-3 rounded relative m-1">
+                                    {validationError.displayName}
+                                </div>
+                            )}
                             <input type="file" className="mt-2" onChange={onChangeFile} />
                             <button type="submit" className="btn bg-green-500 text-white" onClick={()=>updateDisplayName()} >Save</button>
                             <button  type ="reset"  className="btn bg-red-500 text-white" 

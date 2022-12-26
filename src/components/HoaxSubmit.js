@@ -6,6 +6,7 @@ const HoaxSubmit = (props) => {
 
        const [focused, setFocused] = useState(false);
        const [hoax,setHoax] = useState(''); 
+       const [error,setError] = useState(null);
 
 
         const sendHoax = async (hoax) => {
@@ -21,9 +22,14 @@ const HoaxSubmit = (props) => {
               }
                 catch(error){
                     console.log(error);
+                    setError(error.response.data.validationErrors.Hoax);
+                    setHoax('');
                     }
 
         };
+
+
+
 
       
          useEffect(() => {
@@ -46,6 +52,7 @@ const HoaxSubmit = (props) => {
                     onFocus={()=>setFocused(true)} 
                     onChange={(event)=>setHoax(event.target.value)}
                     className="hoaxText " placeholder="What's on your mind?"  />
+                    {error && <div className="bg-red-100 border  text-red-700 px-4 py-3 rounded relative m-1">{error}</div>}
                     {focused && (
                         <div className="button-wrap">
                         <button className=" bg-cyan-400 hover:bg-cyan-500 focus:shadow-outline 
@@ -56,7 +63,11 @@ const HoaxSubmit = (props) => {
                         >Hoax</button>
                         <button  type ="reset"  className="bg-red-400 hover:bg-red-500 focus:shadow-outline 
                         focus:outline-none  text-white  ml-2  font-bold py-2 px-3 rounded " 
-                        onClick={()=>setHoax('') }
+                        onClick={()=>{
+                            setFocused(false);
+                            setHoax('');
+                            setError(null);
+                        } }
                             >X</button>
                             </div>
                     )}

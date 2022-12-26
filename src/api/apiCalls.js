@@ -22,3 +22,7 @@ export const getUser = (username) => {
 export const updateUser = (username,body) => {
   return axios.put(`/api/v1/users/${username}`,body);
 }
+
+export const postHoax = (body) => {
+  return axios.put(`/api/v1/hoaxes`,body);
+}

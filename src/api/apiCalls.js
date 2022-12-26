@@ -24,5 +24,5 @@ export const updateUser = (username,body) => {
 }
 
 export const postHoax = (body) => {
-  return axios.put(`/api/v1/hoaxes`,body);
+  return axios.post(`/api/v1/hoaxes`,body);
 }

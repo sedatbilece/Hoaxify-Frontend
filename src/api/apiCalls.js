@@ -26,3 +26,7 @@ export const updateUser = (username,body) => {
 export const postHoax = (body) => {
   return axios.post(`/api/v1/hoaxes`,body);
 }
+
+export const getHoaxes = (page=0) => {
+  return axios.get(`/api/v1/hoaxes?page=${page}`);
+}

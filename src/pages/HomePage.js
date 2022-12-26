@@ -1,6 +1,6 @@
 import React from "react";
 import UserList from "../components/UserList";
-import HoaxList from "../components/HoaxList";
+import HoaxFeed from "../components/HoaxFeed";
 import HoaxSubmit from "../components/HoaxSubmit";
 
 
@@ -10,6 +10,7 @@ const HomePage = (props) => {
         <div class="grid grid-cols-2 gap-2 ">
             <div classname="hoaxlist  col-span-2" >
             {isLoggedIn && <HoaxSubmit />}
+            <HoaxFeed />    
                 </div>
             
        <div className=" ">

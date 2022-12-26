@@ -47,7 +47,7 @@ const HoaxSubmit = (props) => {
             
             <div className="wrapper "> 
                   <form className="list card-shadow ">
-                    <textarea rows={focused ? "5":"2"} 
+                    <textarea rows={focused ? "7":"2"} 
                     value={hoax} 
                     onFocus={()=>setFocused(true)} 
                     onChange={(event)=>setHoax(event.target.value)}

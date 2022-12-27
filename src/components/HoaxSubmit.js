@@ -4,6 +4,7 @@ import { useState ,useEffect } from "react";
 import { postHoax } from "../api/apiCalls";
 const HoaxSubmit = (props) => {
 
+    const {LoggedInUsername} = props;
        const [focused, setFocused] = useState(false);
        const [hoax,setHoax] = useState(''); 
        const [error,setError] = useState(null);
@@ -12,7 +13,8 @@ const HoaxSubmit = (props) => {
         const sendHoax = async (hoax) => {
            console.log("Hoax sending ... : " + hoax);
               const body = {
-                content: hoax
+                content: hoax,
+                username:LoggedInUsername
               };
               try{
                 const response = await postHoax(body);

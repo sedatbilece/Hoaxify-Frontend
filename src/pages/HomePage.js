@@ -5,11 +5,11 @@ import HoaxSubmit from "../components/HoaxSubmit";
 
 
 const HomePage = (props) => {
-    const { isLoggedIn } = props;
+    const { isLoggedIn ,LoggedInUsername} = props;
     return (
         <div class="grid grid-cols-2 gap-2 ">
             <div classname="hoaxlist  col-span-2" >
-            {isLoggedIn && <HoaxSubmit />}
+            {isLoggedIn && <HoaxSubmit  LoggedInUsername={LoggedInUsername}/>}
             <HoaxFeed />    
                 </div>
             

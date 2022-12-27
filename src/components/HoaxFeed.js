@@ -1,6 +1,8 @@
 import React from "react";
 import { useState ,useEffect} from "react";   
+import { Link } from "react-router-dom";
 import { getHoaxes } from "../api/apiCalls";
+import defaultPic from "../assets/profile.png"
 
 const HoaxFeed = () => {
 
@@ -41,11 +43,19 @@ const HoaxFeed = () => {
             
             {hoaxList.map((hoax) => {
                 return (
-                    <div className="  border  px-4 py-3 rounded relative bg-slate-100 m-2 text-center" >
-
+                    <div className="  border  px-4 py-3 rounded relative bg-slate-100 m-2    " >
+                            <div className="flex ">
+                            <img src={defaultPic} className="rounded-full w-8 h-18"></img>
+                            <Link to={`/user/${hoax.username}`} className=" text-base text-blue-900 ml-4">
+                                <b>{hoax.username} </b> 
+                            </Link>
+                                </div>
+                             
+                        <div>
                         <p className="text-black text-base">
                             {hoax.content}
                         </p>
+                            </div>
                     </div>
                 )
              }) }

@@ -32,7 +32,7 @@ function onLoginSuccess (user) {
       <TopBar  LoggedInUsername={LoggedInUsername} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
      
       <Routes>
-            <Route path="/" element={<HomePage isLoggedIn={isLoggedIn}/>} />
+            <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} LoggedInUsername={LoggedInUsername}/>} />
             <Route path="/login" element={<LoginPage onLoginSuccess={onLoginSuccess}/>}  />
             <Route path="/signup" element={<UserSignupPage/>} />
             <Route path="/user/:username" element={<UserPage LoggedInUsername={LoggedInUsername} isLoggedIn={isLoggedIn} />} />

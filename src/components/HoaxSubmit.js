@@ -2,6 +2,7 @@ import React from "react";
 import "../style/HoaxSubmit.css"
 import { useState ,useEffect } from "react";
 import { postHoax } from "../api/apiCalls";
+import swal from 'sweetalert';
 const HoaxSubmit = (props) => {
 
     const {LoggedInUsername} = props;
@@ -17,10 +18,28 @@ const HoaxSubmit = (props) => {
                 username:LoggedInUsername
               };
               try{
-                const response = await postHoax(body);
-                console.log(response);
-                setFocused(false);
-                setHoax('');
+                swal({
+                    title: "Are you sure?",
+                    text: "You will post a hoax!",
+                    icon: "info",
+                    buttons: true,
+                    dangerMode: true,
+                  })
+                  .then((willPoast) => {
+                    if (willPoast) {
+                      swal("Hoax posted", {
+                        icon: "success",
+                      });
+                        postHoax(body);
+                       setFocused(false);
+                       setHoax('');
+
+                    } else {
+                      swal("Your hoax is safe!");
+                    }
+                  });
+
+                
                 
               }
                 catch(error){

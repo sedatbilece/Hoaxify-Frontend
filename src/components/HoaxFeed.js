@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { getHoaxes } from "../api/apiCalls";
 import defaultPic from "../assets/profile.png"
 import {format } from "timeago.js";
+
+
 const HoaxFeed = () => {
 
     const [hoaxList, setHoaxList] = useState([])

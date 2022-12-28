@@ -1,5 +1,5 @@
 # Hoaxify App
-Hoaxify is a social media app that allows users to share hoaxes. It is a full-stack application that uses Spring Boot for the backend and React for the frontend. It is a project that I created while learning Spring Boot and React. It is a work in progress and I will be adding more features to it in the future.
+Hoaxify is a social media app that allows users to share hoaxes. It is a full-stack application that uses Spring Boot for the backend and React for the frontend. It is a project that I created while learning Spring Boot and React.
 
 ## Features
 - User registration

@@ -21,6 +21,7 @@ const HoaxSubmit = (props) => {
                 console.log(response);
                 setFocused(false);
                 setHoax('');
+                
               }
                 catch(error){
                     console.log(error);

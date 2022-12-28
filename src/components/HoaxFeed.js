@@ -3,17 +3,19 @@ import { useState ,useEffect} from "react";
 import { Link } from "react-router-dom";
 import { getHoaxes } from "../api/apiCalls";
 import defaultPic from "../assets/profile.png"
-
+import {format } from "timeago.js";
 const HoaxFeed = () => {
 
     const [hoaxList, setHoaxList] = useState([])
     const [last , setLast] = useState(false);
     const [pageNumber , setPageNumber] = useState(0);
 
+
     useEffect(() => {
         console.log("useEffect did mount")
         loadHoaxList();
     }, [])
+  
 
     const loadHoaxList = async(page) => {
         try{
@@ -44,11 +46,17 @@ const HoaxFeed = () => {
             {hoaxList.map((hoax) => {
                 return (
                     <div className="  border  px-4 py-3 rounded relative bg-slate-100 m-2    " >
-                            <div className="flex ">
-                            <img src={defaultPic} className="rounded-full w-8 h-18"></img>
+                            <div className="flex datestamp">
+                           
+                                <div className="flex">
+                                <img src={defaultPic} className="rounded-full w-8 h-18"></img>
                             <Link to={`/user/${hoax.username}`} className=" text-base text-blue-900 ml-4">
                                 <b>{hoax.username} </b> 
                             </Link>
+                                </div>
+                            <span className=" text-sm ml-6"> 
+                                {format(hoax.timestamp)}
+                            </span>
                                 </div>
                              
                         <div>

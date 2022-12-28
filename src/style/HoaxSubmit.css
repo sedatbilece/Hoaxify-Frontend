@@ -40,3 +40,8 @@
     display: flex;
     justify-content: flex-end;  
 }
+.datestamp{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
